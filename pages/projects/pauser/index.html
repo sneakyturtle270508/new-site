@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Break</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        .break-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 300px;
+        }
+        .upcoming-breaks {
+            color: gray;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .countdown {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="break-container">
+        <h2>Next Break:</h2>
+        <p id="next-break"></p>
+        <p class="countdown" id="countdown"></p>
+        <div class="upcoming-breaks" id="upcoming"></div>
+    </div>
+
+    <script>
+        const breaks = [
+            "08:45", 
+            "09:35", 
+            "10:30", 
+            "11:20",
+            "12:55", 
+            "14:40"
+        ];
+
+        function updateBreaks() {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            let nextBreak = null;
+            let upcoming = [];
+
+            for (let time of breaks) {
+                let [hours, minutes] = time.split(":").map(Number);
+                let breakTime = hours * 60 + minutes;
+
+                if (breakTime > currentTime) {
+                    if (!nextBreak) nextBreak = breakTime;
+                    upcoming.push(time);
+                }
+            }
+
+            if (nextBreak) {
+                let minutesLeft = nextBreak - currentTime;
+                document.getElementById("next-break").textContent = upcoming.shift();
+                document.getElementById("countdown").textContent = `Starts in ${minutesLeft} min`;
+                document.getElementById("upcoming").innerHTML = upcoming.map(t => `<p>${t}</p>`).join("");
+            } else {
+                document.getElementById("next-break").textContent = "No more breaks today!";
+                document.getElementById("countdown").textContent = "";
+                document.getElementById("upcoming").innerHTML = "";
+            }
+        }
+
+        updateBreaks();
+        setInterval(updateBreaks, 1000);
+    </script>
+
+</body>
+</html>

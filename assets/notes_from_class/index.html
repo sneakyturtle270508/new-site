@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fra pizza sjappe</title>
+</head>
+<body>
+    
+
+
+
+    
+    <script>
+      
+        // TODO: look more into selected index in js
+        
+        function visPizza() {
+            let dropdownHTML = "<select>";
+    for (let i = 0; i < pizza.length; i++) {
+        dropdownHTML += "<option>" + pizza[i] + "</option>";
+    }
+    dropdownHTML += "</select>";
+    pizzaer.innerHTML = dropdownHTML;
+}
+
+
+
+
+
+function visDrikke() {
+    let dropdownHTML = "<select>";
+    for (let i = 0; i < drikke.length; i++) {
+        dropdownHTML += "<option>" + drikke[i] + "</option>";
+    }
+    dropdownHTML += "</select>";
+    tilbehor.innerHTML = dropdownHTML;
+}
+    </script>
+</body>
+</html>
